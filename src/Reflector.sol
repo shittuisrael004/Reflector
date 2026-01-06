@@ -3,10 +3,8 @@ pragma solidity 0.8.30;
 
 contract Reflector {
     address public owner;
-    // 0.01 gwei expressed in wei
-    uint256 public constant FEE_AMOUNT = 1e7; 
-    // 1 gwei threshold
-    uint256 public constant MIN_THRESHOLD = 1e9; 
+    // 1 gwei expressed in wei
+    uint256 public constant FEE_AMOUNT = 1e9; 
 
     event RefundProcessed(address indexed user, uint256 refunded, uint256 feeKept);
     event Withdrawal(address indexed to, uint256 amount);
@@ -36,10 +34,10 @@ contract Reflector {
         uint256 incoming = msg.value;
 
         // Check if sent amount > 1 gwei
-        if (incoming > MIN_THRESHOLD) {
+        if (incoming > FEE_AMOUNT) {
             uint256 refundAmount = incoming - FEE_AMOUNT;
 
-            // Send the refund (minus the 0.01 gwei fee)
+            // Send the refund (minus the 1 gwei fee)
             (bool success, ) = msg.sender.call{value: refundAmount}("");
             require(success, "Refund failed");
 
