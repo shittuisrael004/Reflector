@@ -20,7 +20,7 @@ contract Reflector {
         _;
     }
 
-    function _onlyOwner() internal {
+    function _onlyOwner() internal view {
         require(msg.sender == owner, "Not the owner");
     }
 
