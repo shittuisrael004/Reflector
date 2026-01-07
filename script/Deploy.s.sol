@@ -17,7 +17,5 @@ contract DeployScript is Script {
         reflector = new Reflector();
 
         vm.stopBroadcast();
-
-        // console.log("Contract deployed to:", address(reflector)); 
     }
 }
